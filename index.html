@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaivasvat Mathur - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Poppins for headings -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #0B132B, #3A86FF, #CDB4DB, #B8F2E6);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .floating-image {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-up-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes glowing {
+            0% { box-shadow: 0 0 5px #3A86FF, 0 0 10px #3A86FF; }
+            50% { box-shadow: 0 0 20px #3A86FF, 0 0 30px #3A86FF; }
+            100% { box-shadow: 0 0 5px #3A86FF, 0 0 10px #3A86FF; }
+        }
+
+        .glow-on-hover:hover {
+            animation: glowing 1.5s infinite;
+        }
+
+        /* Typing animation for hero title */
+        .typing-container {
+            display: inline-block;
+        }
+
+        .typing-text {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid;
+            animation: typing 3.5s steps(40, end) forwards, blink-caret .75s step-end infinite;
+            width: 0;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: currentColor }
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 20s infinite;
+        }
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+        }
+
+        /* Glassy Card Style */
+        .glassy-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Floating particles background -->
+    <div id="particles-container" class="particles"></div>
+    
+    <!-- Main Content Container with Backdrop Filter -->
+    <div class="container mx-auto px-4 py-12 md:py-20 relative z-10">
+
+        <!-- Header/Hero Section -->
+        <header class="text-center mb-16 fade-in-up-section visible">
+            <!-- Profile Image with Floating Effect -->
+            <img src="my-profile.png" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-xl floating-image object-cover">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-2">VAIVASVAT MATHUR</h1>
+            <p class="text-lg font-medium text-white mt-2">
+                +91-8826443490 | mathurvaivasvat@gmail.com | Noida, Uttar Pradesh, India
+            </p>
+            <div class="flex justify-center items-center space-x-4 mt-6">
+                <!-- Typing Animation Container -->
+                <div class="typing-container">
+                    <p id="hero-title" class="text-xl sm:text-2xl font-semibold text-white typing-text"></p>
+                </div>
+            </div>
+            
+            <div class="flex justify-center items-center space-x-4 mt-6">
+                <!-- LinkedIn Profile Link with SVG Icon -->
+                <a href="https://www.linkedin.com/in/vaivasvat-mathur24" class="text-white hover:text-[#B8F2E6] transition duration-300 icon-bounce" aria-label="LinkedIn Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.763s.784-1.763 1.75-1.763 1.75.79 1.75 1.763-.783 1.763-1.75 1.763zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <!-- Email Link -->
+                <a href="mailto:mathurvaivasvat@gmail.com" class="text-white hover:text-[#B8F2E6] transition duration-300 icon-bounce" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12.713l-11.985-9.72c.114-.15.263-.266.42-.361 2.253-1.285 4.907-2.029 7.731-2.029h7.625c2.824 0 5.478.744 7.731 2.029.157.095.306.211.42.361l-11.985 9.72zm0 1.954l-12-9.789v15.022h24v-15.022l-12 9.789zm-12-1.688v-10.428l12.441 10.106-12.441-10.106zm24 0l-12.441 10.106 12.441-10.106z"/>
+                    </svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex flex-col gap-8">
+            <!-- About Me Section -->
+            <section class="fade-in-up-section glassy-card p-8 bg-gray-50/70">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-3xl font-bold text-[#3A86FF] font-poppins">About Me</h2>
+                </div>
+                <div id="about-me-content" class="text-gray-700 leading-relaxed">
+                    <p class="mb-4">
+                        Incoming passionate tech enthusiast with a knack for all things digital. Thrives on exploring the latest innovations and mastering new technologies. With a curious mind and a keen eye for detail, I'm always on the lookout for the next big thing in the ever-evolving world of tech.
+                    </p>
+                    <p>
+                        <strong>Date of birth:</strong> 24th September, 2005<br>
+                        <strong>Age:</strong> 19<br>
+                        <strong>Place:</strong> Greater Noida West<br>
+                        <strong>Email:</strong> mathurvaivasvat@gmail.com
+                    </p>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="fade-in-up-section glassy-card p-8 bg-white/70">
+                <h2 class="text-3xl font-bold mb-4 text-[#3A86FF] font-poppins">Education</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="Amity_University_logo.png" alt="Amity University Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Bachelor of Technology in Information Technology</h3>
+                            <p class="text-gray-600 font-medium">Amity University Noida</p>
+                            <p class="text-sm text-gray-500">January 2024 - Present</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="ipscr.jpeg" alt="Indirapuram Public School Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">High School Diploma (Grade IX-XII)</h3>
+                            <p class="text-gray-600 font-medium">Indirapuram Public School</p>
+                            <p class="text-sm text-gray-500">January 2020 - December 2024</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="bhs.png" alt="Boys' High School Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Middle School Diploma (Grade I-VIII)</h3>
+                            <p class="text-gray-600 font-medium">Boys' High School & College</p>
+                            <p class="text-sm text-gray-500">January 2011 - December 2020</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Experience Section -->
+            <section class="fade-in-up-section glassy-card p-8 bg-gray-50/70">
+                <h2 class="text-3xl font-bold mb-4 text-[#3A86FF] font-poppins">Experience</h2>
+                <div id="experience-content" class="space-y-8">
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="tmc.png" alt="TriggerMind Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Social Media Content Editor</h3>
+                            <p class="text-gray-600 font-medium">TriggerMind_ASET</p>
+                            <p class="text-sm text-gray-500">July 2025 - Present</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="gdg.jpg" alt="GDG Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Design Team Lead</h3>
+                            <p class="text-gray-600 font-medium">Google Developer Groups - Amity University, Noida</p>
+                            <p class="text-sm text-gray-500">October 2024 - May 2025</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 timeline-item">
+                        <img src="manzil.png" alt="Manzil Welfare Society Logo" class="w-10 h-10 rounded-full flex-shrink-0">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">PowerPoint Educator</h3>
+                            <p class="text-gray-600 font-medium">Manzil Welfare Society, Delhi</p>
+                            <p class="text-sm text-gray-500">January 2022 - November 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Generated Summary -->
+    <div id="summary-modal" class="modal">
+        <div class="modal-content">
+            <h3 class="text-2xl font-bold text-indigo-600 mb-4">Generated Summary</h3>
+            <p id="summary-output" class="text-gray-700 leading-relaxed min-h-[100px]">
+                <!-- Generated summary will be displayed here -->
+            </p>
+            <div class="flex justify-end mt-4">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-full hover:bg-gray-400 transition duration-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Typing animation logic
+        const heroTitleText = "BTech IT Student & Tech Enthusiast";
+        const heroTitleElement = document.getElementById('hero-title');
+        let i = 0;
+        function typeWriter() {
+            if (i < heroTitleText.length) {
+                heroTitleElement.innerHTML += heroTitleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // Floating particles logic
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for (let j = 0; j < 20; j++) {
+                let particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 5 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Scroll animation logic for sections and timeline items
+        const scrollAnimatedItems = document.querySelectorAll('.fade-in-up-section, .timeline-item');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        function handleScrollAnimation() {
+            scrollAnimatedItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // Window onload to start all animations
+        window.onload = function() {
+            typeWriter();
+            createParticles();
+            handleScrollAnimation();
+        };
+        
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('summary-modal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('summary-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
