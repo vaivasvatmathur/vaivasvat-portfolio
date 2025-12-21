@@ -17,18 +17,6 @@ A clean, responsive personal portfolio website to showcase my profile, skills, p
 - Event participation highlights
 - Clean UI for quick recruiter review
 
-## 📂 Project Structure
-vaivasvat-portfolio/
-│── index.html          # Main portfolio page
-│── assets/
-│   └── images/         # Images, certificates, event photos
-│       ├── cert1.png
-│       ├── cert2.jpeg
-│       ├── event1.jpeg
-│       └── my-profile.png
-│── README.md
-
-
 ## 🚀 Deployment
 The website is deployed using **Vercel** and **GitHub Pages**.
 
