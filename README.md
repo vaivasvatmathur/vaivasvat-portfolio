@@ -28,6 +28,7 @@ vaivasvat-portfolio/
 │       └── my-profile.png
 │── README.md
 
+
 ## 🚀 Deployment
 The website is deployed using **Vercel** and **GitHub Pages**.
 
