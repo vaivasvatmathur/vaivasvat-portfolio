@@ -15,7 +15,6 @@ A clean, responsive personal portfolio website to showcase my profile, skills, p
 - About Me section
 - Certifications & achievements showcase
 - Event participation highlights
-- Clean UI for quick recruiter review
 
 ## 🚀 Deployment
 The website is deployed using **Vercel** and **GitHub Pages**.
